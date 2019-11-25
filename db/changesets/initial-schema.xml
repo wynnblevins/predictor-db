@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+  <changeSet author="wblevins" id="1">
+    <createTable tableName="stream">
+      <column name="id" type="varchar(32)">
+        <constraints nullable="false" primaryKey="true" unique="true"/>
+      </column>
+      <column name="running" type="boolean" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    
+    <createTable tableName="term_streams">
+      <column name="id" type="varchar(32)">
+        <constraints nullable="false" primaryKey="true" unique="true"/>
+      </column>
+      <column name="term_text" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="stream_id" type="varchar(32)"></column>
+      <column name="stock_id" type="varchar(32)"></column>
+    </createTable>
+    
+    <createTable tableName="stock">
+      <column name="id" type="varchar(32)">
+        <constraints nullable="false" primaryKey="true" unique="true"/>
+      </column>
+      <column name="ticker" type="varchar(255)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="company" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="share_value" type="money">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>  
+  </changeSet>
+  
+  <changeSet author="wblevins" id="2">
+    <addForeignKeyConstraint 
+      baseColumnNames="stock_id"
+      baseTableName="term_streams"
+      constraintName="fk_term_streams_stock"
+      deferrable="true"
+      initiallyDeferred="true"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="id"
+      referencedTableName="stock"/>  
+    <addForeignKeyConstraint 
+      baseColumnNames="stream_id"
+      baseTableName="term_streams"
+      constraintName="fk_term_streams_stream"
+      deferrable="true"
+      initiallyDeferred="true"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="id"
+      referencedTableName="stream"/>  
+  </changeSet>
+</databaseChangeLog> 
