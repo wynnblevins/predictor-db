@@ -6,20 +6,8 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
   
   <property name="type.uuid" value="java.sql.Types.VARCHAR(36)" />
-
-  <changeSet author="wblevins" id="1">    
-    <createTable tableName="stream">
-      <column name="id" type="${type.uuid}">
-        <constraints nullable="false" unique="true" 
-          primaryKey="true"/>
-      </column>
-      <column name="running" type="boolean" defaultValueBoolean="false">
-        <constraints nullable="false"/>
-      </column>
-    </createTable>
-  </changeSet>
   
-  <changeSet author="wblevins" id="2">
+  <changeSet author="wblevins" id="1">
     <createTable tableName="stock">
       <column name="id" type="${type.uuid}">
         <constraints nullable="false" unique="true"
@@ -35,24 +23,15 @@
         <constraints nullable="false"/>
       </column>
     </createTable>
-  </changeSet>
-
-  <changeSet author="wblevins" id="3">
-    <createTable tableName="term_stream">
+    
+    <createTable tableName="stock_stream">
       <column name="id" type="${type.uuid}">
-        <constraints unique="true" nullable="false"/>
+        <constraints nullable="false" unique="true"
+          primaryKey="true"/>
       </column>
-      <column name="term_text" type="varchar(255)">
-        <constraints nullable="false"/>
+      <column name="running" type="boolean">
+        <constraints nullable="false"></constraints>
       </column>
-      <column name="stream_id" type="varchar(36)">
-        <constraints unique="true" references="stream(id)"
-          foreignKeyName="stream_id"/>
-      </column>
-      <column name="stock_id" type="varchar(36)">
-        <constraints unique="true" references="stock(id)" 
-          foreignKeyName="stock_id"/>
-      </column>
-    </createTable>  
+    </createTable>
   </changeSet>
 </databaseChangeLog> 
