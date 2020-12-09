@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+  <!-- the chatter table will be used by the sentiment analyzer to store
+  tweet text or news headlines with they're associated sentiment score -->
+  <changeSet id="2" author="wblevins">
+    <createTable tableName="chatter">
+      <column name="id" type="${type.uuid}">
+        <constraints nullable="false" unique="true" primaryKey="true"/>
+      </column>
+      <column name="text" type="LONGTEXT">
+        <constraints nullable="false"></constraints>
+      </column>
+      <column name="text" type="LONGTEXT">
+        <constraints nullable="false"></constraints>
+      </column>
+    </createTable>
+  </changeSet>
+</databaseChangeLog> 
