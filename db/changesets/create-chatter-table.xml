@@ -14,7 +14,7 @@
       <column name="text" type="LONGTEXT">
         <constraints nullable="false"></constraints>
       </column>
-      <column name="text" type="LONGTEXT">
+      <column name="sentiment_score" type="INTEGER">
         <constraints nullable="false"></constraints>
       </column>
     </createTable>

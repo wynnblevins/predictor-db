@@ -16,7 +16,7 @@ def createDatabase():
     print(command)
     
     os.system("docker exec -it " + config.get("database", "CONTAINER_NAME") + " createdb -U postgres -h localhost -w " + config.get("database", "DATABASE"))
-    os.system('liquibase --classpath=' + config.get("database", "CLASSPATH") + ' --changeLogFile="./db/db.changelog-master.xml" --driver="org.postgresql.Driver" --url="jdbc:postgresql://10.0.0.228:5432/' + config.get("database", "DATABASE") + '" --username=' + config.get("database", "USERNAME") + ' --password=' + config.get("database", "PASSWORD") + ' update')
+    os.system('liquibase --classpath=' + config.get("database", "CLASSPATH") + ' --changeLogFile="./db/db.changelog-master.xml" --driver="org.postgresql.Driver" --url="jdbc:postgresql://' + config.get("database", "IP") + ':5432/' + config.get("database", "DATABASE") + '" --username=' + config.get("database", "USERNAME") + ' --password=' + config.get("database", "PASSWORD") + ' update')
 
 def pgup():
     print("Starting...")
